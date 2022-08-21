@@ -1,6 +1,6 @@
 ---
 title: Pandit
-subtitle: Pandoc-based static site generator.
+subtitle: Pandoc-based static site generator
 ---
 
 # Introduction
