@@ -67,6 +67,8 @@ dot: $(DOT_SVG)
 		--from=org+citations \
 		--to=html5+smart \
 		--defaults=$(if $(shell test -e $(shell basename $< .org).yaml),$(shell basename $< .org).yaml,defaults.yaml) \
+		$(if $(shell test -e $(shell dirname $<)/defaults.yaml && echo 1),--defaults=$(shell dirname $<)/defaults.yaml,) \
+		$(if $(shell test -e $(subst .org,.yaml,$<) && echo 1),--defaults=$(subst .org,.yaml,$<),) \
 		$(PANDOC_OPTS) \
 		--katex=$(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_LIB)/ \
 		$(foreach css,$(CSS),--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
@@ -78,6 +80,8 @@ dot: $(DOT_SVG)
 		--from=rst \
 		--to=html5+smart \
 		--defaults=$(if $(shell test -e $(shell basename $< .rst).yaml),$(shell basename $< .rst).yaml,defaults.yaml) \
+		$(if $(shell test -e $(shell dirname $<)/defaults.yaml && echo 1),--defaults=$(shell dirname $<)/defaults.yaml,) \
+		$(if $(shell test -e $(subst .rst,.yaml,$<) && echo 1),--defaults=$(subst .rst,.yaml,$<),) \
 		$(PANDOC_OPTS) \
 		--katex=$(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_LIB)/ \
 		$(foreach css,$(CSS),--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
@@ -90,6 +94,8 @@ dot: $(DOT_SVG)
 		--from=docbook \
 		--to=html5+smart \
 		--defaults=$(if $(shell test -e $(shell basename $< .adoc).yaml),$(shell basename $< .adoc).yaml,defaults.yaml) \
+		$(if $(shell test -e $(shell dirname $<)/defaults.yaml && echo 1),--defaults=$(shell dirname $<)/defaults.yaml,) \
+		$(if $(shell test -e $(subst .adoc,.yaml,$<) && echo 1),--defaults=$(subst .adoc,.yaml,$<),) \
 		$(PANDOC_OPTS) \
 		--katex=$(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_LIB)/ \
 		$(foreach css,$(CSS),--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
