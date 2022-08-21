@@ -11,7 +11,7 @@ pages:
     - apk add wget make git graphviz py3-pip
     - pip install pandoc-include
     - git submodule update --init
-    - cp pub/pandit/config/tufte/* .
+    - cp config/tufte/* .
     - mv README.md index.md
     - make
   artifacts:
