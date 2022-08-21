@@ -12,6 +12,8 @@ pages:
     - pip install pandoc-include
     - git submodule update --init
     - cp config/tufte/* .
+    - git submodule add https://github.com/p2pcollab/tufte-css pub/tufte-css
+    - git submodule add https://github.com/p2pcollab/tufte-pandoc-css pub/tufte-pandoc-css
     - make
     - mv public/README.html public/index.html
   artifacts:
