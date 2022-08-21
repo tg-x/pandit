@@ -30,6 +30,16 @@ PANDOC_OPTS := \
 	--data-dir=. \
 	--section-divs
 
+# Publish to web server with filename extensions and index.html removed from links
+WEB :=
+LINK_REGEX := \
+	s/href="\([^\":]*\)\.\(md\|org\|rst\|adoc\)"/href="\1.html"/g;\
+	$(if $(WEB),$\
+	s/href="\([^\":]*\)\.html"/href="\1"/g;\
+	s/href="\([^\":]*\/\)index"/href="\1"/g;\
+	s/href="index"/href="."/g;\
+	,)
+
 all: md org rst adoc dot
 md: $(MD_HTML) css lib img dot
 org: $(ORG_HTML) css lib img dot
@@ -47,8 +57,9 @@ dot: $(DOT_SVG)
 		$(if $(shell test -e $(subst .md,.yaml,$<) && echo 1),--defaults=$(subst .md,.yaml,$<),) \
 		$(PANDOC_OPTS) \
 		--katex=$(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_LIB)/ \
-		$(foreach css,$(CSS),--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
-		$< | sed 's/href="\([^":]*\)\.md"/href="\1.html"/g' > $(OUT)/$(patsubst %.md,%.html,$<)
+		$(foreach css,$(CSS),$\
+			--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
+		$< | sed '$(LINK_REGEX)' > $(OUT)/$(patsubst %.md,%.html,$<)
 
 %.org.html: %.org $(TMPL) $(CSS)
 	mkdir -p $(dir $(OUT)/$(dir $@))
@@ -59,7 +70,7 @@ dot: $(DOT_SVG)
 		$(PANDOC_OPTS) \
 		--katex=$(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_LIB)/ \
 		$(foreach css,$(CSS),--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
-		$< | sed 's/href="\([^":]*\)\.org"/href="\1.html"/g' > $(OUT)/$(patsubst %.org,%.html,$<)
+		$< | sed '$(LINK_REGEX)' > $(OUT)/$(patsubst %.org,%.html,$<)
 
 %.rst.html: %.rst $(TMPL) $(CSS)
 	mkdir -p $(dir $(OUT)/$(dir $@))
@@ -70,7 +81,7 @@ dot: $(DOT_SVG)
 		$(PANDOC_OPTS) \
 		--katex=$(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_LIB)/ \
 		$(foreach css,$(CSS),--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
-		$< | sed 's/href="\([^":]*\)\.rst"/href="\1.html"/g' > $(OUT)/$(patsubst %.rst,%.html,$<)
+		$< | sed '$(LINK_REGEX)' > $(OUT)/$(patsubst %.rst,%.html,$<)
 
 %.adoc.html: %.adoc $(TMPL) $(CSS)
 	mkdir -p $(dir $(OUT)/$(dir $@))
@@ -82,7 +93,7 @@ dot: $(DOT_SVG)
 		$(PANDOC_OPTS) \
 		--katex=$(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_LIB)/ \
 		$(foreach css,$(CSS),--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
-		| sed 's/href="\([^":]*\)\.adoc"/href="\1.html"/g' > $(OUT)/$(patsubst %.adoc,%.html,$<)
+		| sed '$(LINK_REGEX)' > $(OUT)/$(patsubst %.adoc,%.html,$<)
 
 %.svg: %.dot
 	mkdir -p $(dir $(OUT)/$(dir $@))
