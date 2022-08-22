@@ -28,6 +28,26 @@ For each source file, the default options are read from all of these files, if t
 - `defaults.yaml` in the current directory
 - `<basename>.yaml` (e.g. `example.yaml` for `example.md`)
 
+
+The generated site can be viewed on the local file system, or served by a web server.
+
+To generate the site to be accessed from the local file system, use:
+
+```
+make
+```
+
+To generate the site to be served by a web server,
+and transform links to remove the `.html` extension and the `index.html` ending, use:
+
+```
+make WEB=1
+```
+
+# Dependencies
+
+Pandit strives to be minimalist, it only depends on `pandoc`, `git`, and `make`.
+
 # Usage
 
 This example sets up a site with the [tufte-pandoc-css](https://github.com/p2pcollab/tufte-pandoc-css) template
@@ -40,12 +60,7 @@ git submodule add https://github.com/p2pcollab/tufte-pandoc-css pub/tufte-pandoc
 git submodule add https://github.com/p2pcollab/tufte-css pub/tufte-css
 ln -s pub/pandit/Makefile
 cp pub/pandit/config/tufte/* .
-```
-
-Finally, generate the site:
-
-```
-make
+make WEB=1
 ```
 
 # License
