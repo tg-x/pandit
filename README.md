@@ -1,6 +1,7 @@
 ---
 title: Pandit
 subtitle: Pandoc-based static site generator
+author: by [P2Pcollab](https://p2pcollab.net)
 ---
 
 # Introduction
@@ -62,6 +63,10 @@ ln -s pub/pandit/Makefile
 cp pub/pandit/config/tufte/* .
 make WEB=1
 ```
+
+# Source code & issues
+
+See this [repository](https://github.com/p2pcollab/pandit) for the source code and issues.
 
 # License
 
