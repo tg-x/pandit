@@ -64,9 +64,9 @@ cp pub/pandit/config/tufte/* .
 make WEB=1
 ```
 
-# Source code & issues
+# Repository
 
-See this [repository](https://github.com/p2pcollab/pandit) for the source code and issues.
+See this [repository](https://github.com/p2pcollab/pandit) for the source code and issue tracker.
 
 # License
 
