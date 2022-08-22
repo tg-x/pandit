@@ -4,7 +4,7 @@ subtitle: Pandoc-based static site generator
 author: by [P2Pcollab](https://p2pcollab.net)
 ---
 
-# Introduction
+# About
 
 Pandit uses [Pandoc](https://pandoc.org)
 to generate HTML files from Markdown, Org-mode, reStructuredText, and AsciiDoc files.
