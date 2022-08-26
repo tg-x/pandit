@@ -1,7 +1,7 @@
 ---
 title: Pandit
 subtitle: Pandoc-based static site generator
-author: by [P2Pcollab](https://p2pcollab.net)
+author: [P2Pcollab](https://p2pcollab.net)
 ---
 
 # About
