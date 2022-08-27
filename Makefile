@@ -1,4 +1,5 @@
-# Pandit - Pandoc-based static site generator
+# Pandit - Minimalist Pandoc-based static site generator
+# https://p2pcollab.net/pandit/
 
 MD := $(shell git ls-files | grep '\.md$$')
 ORG := $(shell git ls-files | grep '\.org$$')
