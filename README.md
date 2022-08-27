@@ -1,10 +1,11 @@
 ---
 title: Pandit
-subtitle: Pandoc-based static site generator
+subtitle: Minimalist Pandoc-based static site generator
+pagetitle: Pandit - Minimalist Pandoc-based static site generator
 author: "[P2Pcollab](https://p2pcollab.net)"
 ---
 
-# About
+## About
 
 Pandit uses [Pandoc](https://pandoc.org)
 to generate HTML files from Markdown, Org-mode, reStructuredText, and AsciiDoc files.
@@ -45,11 +46,11 @@ and transform links to remove the `.html` extension and the `index.html` ending,
 make WEB=1
 ```
 
-# Dependencies
+## Dependencies
 
 Pandit strives to be minimalist, it only depends on `pandoc`, `git`, and `make`.
 
-# Usage
+## Usage
 
 This example sets up a site with the [tufte-pandoc-css](https://github.com/p2pcollab/tufte-pandoc-css) template
 and [tufte-css](https://github.com/p2pcollab/tufte-css) stylesheets.
@@ -64,10 +65,10 @@ cp pub/pandit/config/tufte/* .
 make WEB=1
 ```
 
-# Repository
+## Repository
 
 See this [repository](https://github.com/p2pcollab/pandit) for the source code and issue tracker.
 
-# License
+## License
 
 Licensed under either of Apache License, Version 2.0 or MIT license at your option.
