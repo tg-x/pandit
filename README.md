@@ -1,7 +1,6 @@
 ---
 title: Pandit
 subtitle: Minimalist Pandoc-based static site generator
-pagetitle: Pandit - Minimalist Pandoc-based static site generator
 author: "[P2Pcollab](https://p2pcollab.net)"
 ---
 
