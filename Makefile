@@ -34,11 +34,11 @@ PANDOC_OPTS := \
 # Publish to web server with filename extensions and index.html removed from links
 WEB :=
 LINK_REGEX := \
-	s/href="\([^\":]*\)\.\(md\|org\|rst\|adoc\)"/href="\1.html"/g;\
+	s/href="\([^\":]*\)\.\(md\|org\|rst\|adoc\)\(\#[^\"]*\)\?"/href="\1.html\3"/g;\
 	$(if $(WEB),$\
-	s/href="\([^\":]*\)\.html"/href="\1"/g;\
-	s/href="\([^\":]*\/\)index"/href="\1"/g;\
-	s/href="index"/href="."/g;\
+	s/href="\([^\":]*\)\.html\(#[^\"]*\)\?"/href="\1\2"/g;\
+	s/href="\([^\":]*\/\)index\(#[^\"]*\)\?"/href="\1\2"/g;\
+	s/href="index\(#[^\"]*\)\?"/href=".\1"/g;\
 	,)
 
 all: md org rst adoc dot
