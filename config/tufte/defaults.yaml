@@ -1,4 +1,3 @@
-template: pub/tufte-pandoc-css/tufte.html5
 highlight-style: monochrome
 toc: true
 
@@ -7,3 +6,4 @@ metadata:
   toc-title: Table of Contents
   toc-margin: true
   author-prefix: by
+  pdf-link: true
