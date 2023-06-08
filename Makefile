@@ -66,7 +66,7 @@ adoc: $(ADOC_HTML) $(ADOC_PDF) css lib img dot
 
 dot: $(DOT_SVG)
 
-%.md.html: %.md $(TMPL) $(CSS)
+%.md.html: %.md $(CSS)
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	pandoc \
 		--from=markdown \
@@ -82,7 +82,7 @@ dot: $(DOT_SVG)
 			--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
 		$< | sed '$(LINK_REGEX)' > $(OUT)/$(patsubst %.md,%.html,$<)
 
-%.org.html: %.org $(TMPL) $(CSS)
+%.org.html: %.org $(CSS)
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	pandoc \
 		--from=org+citations \
@@ -97,7 +97,7 @@ dot: $(DOT_SVG)
 		$(foreach css,$(CSS),--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
 		$< | sed '$(LINK_REGEX)' > $(OUT)/$(patsubst %.org,%.html,$<)
 
-%.rst.html: %.rst $(TMPL) $(CSS)
+%.rst.html: %.rst $(CSS)
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	pandoc \
 		--from=rst \
@@ -112,7 +112,7 @@ dot: $(DOT_SVG)
 		$(foreach css,$(CSS),--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
 		$< | sed '$(LINK_REGEX)' > $(OUT)/$(patsubst %.rst,%.html,$<)
 
-%.adoc.html: %.adoc $(TMPL) $(CSS)
+%.adoc.html: %.adoc $(CSS)
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	asciidoctor -v -b docbook5 -o - $< \
 	| pandoc \
@@ -128,7 +128,7 @@ dot: $(DOT_SVG)
 		$(foreach css,$(CSS),--css $(subst %,,$(patsubst %,../,$(subst /,%,$(subst ./,,$(dir $@)))))$(OUT_CSS)/$(notdir $(css))) \
 		| sed '$(LINK_REGEX)' > $(OUT)/$(patsubst %.adoc,%.html,$<)
 
-%.md.pdf: %.md $(TMPL) $(CSS)
+%.md.pdf: %.md img dot
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	pandoc \
 		--from=markdown \
@@ -142,7 +142,7 @@ dot: $(DOT_SVG)
 		-o $(OUT)/$(patsubst %.md,%.pdf,$<) \
 		$<
 
-%.org.pdf: %.org $(TMPL) $(CSS)
+%.org.pdf: %.org img dot
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	pandoc \
 		--from=org+citations \
@@ -156,7 +156,7 @@ dot: $(DOT_SVG)
 		-o $(OUT)/$(patsubst %.org,%.pdf,$<) \
 		$<
 
-%.rst.pdf: %.rst $(TMPL) $(CSS)
+%.rst.pdf: %.rst img dot
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	pandoc \
 		--from=rst \
@@ -170,7 +170,7 @@ dot: $(DOT_SVG)
 		-o $(OUT)/$(patsubst %.rst,%.pdf,$<) \
 		$<
 
-%.adoc.pdf: %.adoc $(TMPL) $(CSS)
+%.adoc.pdf: %.adoc img dot
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	asciidoctor -v -b docbook5 -o - $< \
 	| pandoc \
@@ -184,7 +184,7 @@ dot: $(DOT_SVG)
 		$(PANDOC_OPTS_PDF) \
 		-o $(OUT)/$(patsubst %.adoc,%.pdf,$<)
 
-%.md.tex: %.md $(TMPL) $(CSS)
+%.md.tex: %.md
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	pandoc \
 		--from=markdown \
@@ -197,7 +197,7 @@ dot: $(DOT_SVG)
 		-o $(OUT)/$(patsubst %.md,%.tex,$<) \
 		$<
 
-%.org.tex: %.org $(TMPL) $(CSS)
+%.org.tex: %.org
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	pandoc \
 		--from=org+citations \
@@ -210,7 +210,7 @@ dot: $(DOT_SVG)
 		-o $(OUT)/$(patsubst %.org,%.tex,$<) \
 		$<
 
-%.rst.tex: %.rst $(TMPL) $(CSS)
+%.rst.tex: %.rst
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	pandoc \
 		--from=rst \
@@ -223,7 +223,7 @@ dot: $(DOT_SVG)
 		-o $(OUT)/$(patsubst %.rst,%.tex,$<) \
 		$<
 
-%.adoc.tex: %.adoc $(TMPL) $(CSS)
+%.adoc.tex: %.adoc
 	mkdir -p $(dir $(OUT)/$(dir $@))
 	asciidoctor -v -b docbook5 -o - $< \
 	| pandoc \
